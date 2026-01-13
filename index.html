@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>洗蛰网络科技 - 人工智能与数据解决方案</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 原有样式保持不变 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 20px;
+            color: #2c3e50;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h2 span {
+            color: #ffd700;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #fff;
+            color: #2c3e50;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 通用部分样式 */
+        .section {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+        
+        .cases {
+            background-color: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .section-title p {
+            font-size: 16px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* 服务网格样式 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card i {
+            font-size: 40px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .case-tag {
+            display: inline-block;
+            background-color: #f1f5f9;
+            color: #64748b;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 案例网格样式 */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .case-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .case-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .case-content {
+            padding: 25px;
+        }
+        
+        .case-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .case-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* 合作表单样式 */
+        .cooperation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* 定金金额显示样式 */
+        #depositAmount {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        /* 支付提示样式 */
+        .payment-note {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #3498db;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-column a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-column a:hover {
+            opacity: 1;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* 动画效果 */
+        .fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px 15px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <h1>洗蛰网络科技</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#services">核心业务</a></li>
+                    <li><a href="#cases">成功案例</a></li>
+                    <li><a href="#cooperation">合作意向</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fadeInUp">
+                <h2>创新技术驱动<span>未来解决方案</span></h2>
+                <p>洗蛰网络科技专注于人工智能、互联网技术、数据挖掘和数据库创建，为企业提供前沿的技术解决方案，助力数字化转型与智能升级。</p>
+                <a href="#cooperation" class="cta-button">开始合作</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心业务 -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title fadeInUp">
+                <h2>核心业务</h2>
+                <p>我们致力于为企业提供全方位、高效率的技术解决方案</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fadeInUp delay-1">
+                    <i class="fas fa-robot"></i>
+                    <h3>人工智能</h3>
+                    <p>提供机器学习、深度学习、自然语言处理等AI解决方案，助力企业智能化转型。</p>
+                    <span class="case-tag">机器学习 · 计算机视觉 · 智能推荐</span>
+                </div>
+                <div class="service-card fadeInUp delay-2">
+                    <i class="fas fa-globe"></i>
+                    <h3>互联网技术</h3>
+                    <p>构建高性能、高可用的互联网平台与应用，提供全面的技术开发与支持。</p>
+                    <span class="case-tag">Web开发 · 移动应用 · 云计算</span>
+                </div>
+                <div class="service-card fadeInUp delay-3">
+                    <i class="fas fa-database"></i>
+                    <h3>数据挖掘</h3>
+                    <p>从海量数据中提取有价值信息，为决策提供数据支持与商业洞察。</p>
+                    <span class="case-tag">数据分析 · 预测模型 · 数据可视化</span>
+                </div>
+                <div class="service-card fadeInUp">
+                    <i class="fas fa-server"></i>
+                    <h3>数据库创建</h3>
+                    <p>设计与实现高性能、可扩展的数据库系统，确保数据安全与高效管理。</p>
+                    <span class="case-tag">关系型数据库 · NoSQL · 数据仓库</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成功案例 -->
+    <section class="section cases" id="cases">
+        <div class="container">
+            <div class="section-title fadeInUp">
+                <h2>成功案例</h2>
+                <p>我们为各行业客户提供了专业的技术解决方案</p>
+            </div>
+            <div class="cases-grid">
+                <div class="case-card fadeInUp delay-1">
+                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')"></div>
+                    <div class="case-content">
+                        <h3>智能金融风控系统</h3>
+                        <p>为某大型银行构建基于AI的风险评估系统，欺诈识别准确率提升40%，减少坏账损失超过2亿元。</p>
+                        <span class="case-tag">人工智能 · 金融科技</span>
+                    </div>
+                </div>
+                <div class="case-card fadeInUp delay-2">
+                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')"></div>
+                    <div class="case-content">
+                        <h3>电商智能推荐平台</h3>
+                        <p>为电商巨头开发个性化推荐系统，用户转化率提升35%，平均订单价值增加28%。</p>
+                        <span class="case-tag">数据挖掘 · 推荐算法</span>
+                    </div>
+                </div>
+                <div class="case-card fadeInUp delay-3">
+                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')"></div>
+                    <div class="case-content">
+                        <h3>医疗大数据平台</h3>
+                        <p>构建医疗行业分布式数据库系统，处理PB级医疗数据，查询效率提升20倍。</p>
+                        <span class="case-tag">数据库 · 医疗健康</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作意向 -->
+    <section class="section cooperation" id="cooperation">
+        <div class="container">
+            <div class="section-title fadeInUp">
+                <h2>合作意向</h2>
+                <p>我们期待与您共同探索技术创新带来的无限可能</p>
+            </div>
+            <div class="cooperation-form fadeInUp delay-1">
+                <form id="cooperationForm">
+                    <div class="form-group">
+                        <label for="name">姓名 / 公司名称</label>
+                        <input type="text" id="name" placeholder="请输入您的姓名或公司名称" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">联系方式</label>
+                        <input type="text" id="contact" placeholder="电话或邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectCost">项目预估总成本（元）</label>
+                        <input type="number" id="projectCost" placeholder="请输入项目预估总成本，如50000000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="depositRate">定金比例</label>
+                        <select id="depositRate" required>
+                            <option value="" disabled selected>请选择定金比例</option>
+                            <option value="0.1">10%（不返还）</option>
+                            <option value="0.05">5%（不返还）</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>预支付定金金额</label>
+                        <input type="text" id="depositAmount" readonly placeholder="系统自动计算" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">合作意向</label>
+                        <select id="interest" required>
+                            <option value="" disabled selected>请选择您感兴趣的业务</option>
+                            <option value="ai">人工智能解决方案</option>
+                            <option value="web">互联网技术开发</option>
+                            <option value="data">数据挖掘与分析</option>
+                            <option value="db">数据库设计与实现</option>
+                            <option value="other">其他合作意向</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">项目需求描述</label>
+                        <textarea id="message" placeholder="请简要描述您的项目需求或合作意向..." required></textarea>
+                    </div>
+                    
+                    <div class="payment-note">
+                        <i class="fas fa-info-circle"></i> 温馨提示：定金支付后不返还，请确认项目信息无误后再提交。支付成功后我们将在24小时内与您联系。
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">提交并支付定金</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>洗蛰网络科技</h3>
+                    <p>专注于前沿技术创新，为企业提供专业的人工智能、互联网技术和数据解决方案，助力数字化转型。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>业务领域</h3>
+                    <a href="#">人工智能解决方案</a>
+                    <a href="#">互联网技术开发</a>
+                    <a href="#">数据挖掘与分析</a>
+                    <a href="#">数据库设计与实现</a>
+                    <a href="#">企业数字化转型咨询</a>
+                </div>
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 北京市海淀区科技园区</p>
+                    <p><i class="fas fa-phone"></i> 15790352832</p>
+                    <p><i class="fas fa-envelope"></i> wangjianwen_gis@163.com</p>
+                    <p><i class="fas fa-clock"></i> 工作日 9:00 - 18:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 洗蛰网络科技有限公司 版权所有 | 京ICP备********号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 定金金额计算逻辑
+        document.getElementById('depositRate').addEventListener('change', function() {
+            const projectCost = parseFloat(document.getElementById('projectCost').value);
+            const depositRate = parseFloat(this.value);
+            
+            if (!isNaN(projectCost) && !isNaN(depositRate)) {
+                const depositAmount = projectCost * depositRate;
+                document.getElementById('depositAmount').value = depositAmount.toLocaleString('zh-CN') + '元';
+            }
+        });
+
+        // 表单提交处理
+        document.getElementById('cooperationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const formData = {
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value,
+                projectCost: document.getElementById('projectCost').value,
+                depositRate: document.getElementById('depositRate').value,
+                depositAmount: document.getElementById('depositAmount').value,
+                interest: document.getElementById('interest').value,
+                message: document.getElementById('message').value
+            };
+            
+            // 验证定金金额是否已计算
+            if (!formData.depositAmount || formData.depositAmount === '系统自动计算') {
+                alert('请先选择定金比例并计算定金金额');
+                return;
+            }
+            
+            // 显示确认信息
+            const confirmation = confirm(`确认提交以下信息并支付定金？\n\n` +
+                `项目总成本：${formData.projectCost}元\n` +
+                `定金比例：${formData.depositRate * 100}%\n` +
+                `定金金额：${formData.depositAmount}\n\n` +
+                `定金支付后不返还，确认继续？`);
+            
+            if (confirmation) {
+                // 这里可以添加实际的支付逻辑
+                // 示例：跳转到支付页面
+                alert('正在跳转到支付页面...\n\n实际项目中这里会集成支付宝/微信支付接口');
+                
+                // 在实际项目中，这里会调用后端API生成支付链接
+                // 以下是示例代码，实际使用时需要替换为真实的支付接口
+                const depositNumber = formData.depositAmount.replace(/[^0-9]/g, '');
+                const paymentUrl = `https://your-payment-gateway.com/pay?amount=${depositNumber}`;
+                
+                // 跳转到支付页面
+                // window.location.href = paymentUrl;
+                
+                // 这里只是模拟支付成功
+                alert('支付模拟成功！我们将在24小时内与您联系。');
+                this.reset();
+                document.getElementById('depositAmount').value = '系统自动计算';
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 滚动动画
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fadeInUp');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // 初始加载时执行一次
+    </script>
+</body>
+</html>
